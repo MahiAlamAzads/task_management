@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>client</title>
+</head>
+
+<body>
+  <div id="app" class="flex">
+    <!-- side-bar -->
+    <div class="side-bar w-2/9 bg-amber-100 min-h-screen">
+      <h3>Projects</h3>
+
+      <!-- input for project creating -->
+      <div class="flex items-center space-x-2">
+        <input type="text" class="border ring-1 ring-gray-300 rounded p-2" placeholder="Add item...">
+        <button class="bg-blue-500 text-white px-4 py-2 rounded">+</button>
+      </div>
+
+      <!-- all project here -->
+      <ul>
+        <li>learning sql for scratch</li>
+        <li>learning js from scratch</li>
+        <li>learning css from from scratch</li>
+        <li>learning nodejs from scratch</li>
+      </ul>
+    </div>
+
+
+
+    <!-- main-bar -->
+    <div class="content-bar w-7/9 bg-amber-200 min-h-screen">
+      <h2>Learning SQL from scratch</h2>
+
+      <!-- input box for add task or step or module -->
+      <div class="flex items-center space-x-2">
+        <input type="text" class="border ring-1 ring-gray-300 rounded p-2" placeholder="Add item...">
+        <button class="bg-blue-500 text-white px-4 py-2 rounded">+</button>
+      </div>
+
+      <!-- All task for selected project -->
+      <div>
+        <ul>
+          <li></li>
+          <li></li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+  <script type="module" src="./src/main.js"></script>
+</body>
+
+</html>
+
+<!-- npx @tailwindcss/cli -i ./src/input.css -o ./src/output.css --watch -->
