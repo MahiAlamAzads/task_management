@@ -6,49 +6,453 @@
   <link rel="icon" type="image/svg+xml" href="/vite.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>client</title>
+  <link rel="stylesheet" href="./src/style.css">
 </head>
 
 <body>
   <div id="app" class="flex">
-    <!-- side-bar -->
-    <div class="side-bar w-2/9 bg-amber-100 min-h-screen">
-      <h3>Projects</h3>
 
+
+
+
+
+
+    <!--small side-bar -->
+    <div id="small-sidebar" class="w-16 bg-slate-900 p-2 flex flex-col items-center space-y-4 min-h-screen shadow-lg">
+      <!-- Sidebar Icon -->
+      <button id="sidebarIcon" class="w-full flex justify-center p-2 rounded hover:bg-slate-800 transition">
+        <svg width="32px" height="32px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+          <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+          <g id="SVGRepo_iconCarrier">
+            <path
+              d="M2 11C2 7.22876 2 5.34315 3.17157 4.17157C4.34315 3 6.22876 3 10 3H14C17.7712 3 19.6569 3 20.8284 4.17157C22 5.34315 22 7.22876 22 11V13C22 16.7712 22 18.6569 20.8284 19.8284C19.6569 21 17.7712 21 14 21H10C6.22876 21 4.34315 21 3.17157 19.8284C2 18.6569 2 16.7712 2 13V11Z"
+              stroke="#ffffff" stroke-width="1.5"></path>
+            <path d="M15 21L15 3" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"></path>
+          </g>
+        </svg>
+      </button>
+
+      <!-- Settings Icon -->
+      <button id="settingIcon" class="w-full flex justify-center p-2 rounded hover:bg-slate-800 transition">
+        <svg width="32px" height="32px" viewBox="0 0 1024 1024" class="icon" version="1.1"
+          xmlns="http://www.w3.org/2000/svg" fill="#000000">
+          <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+          <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+          <g id="SVGRepo_iconCarrier">
+            <path d="M512 512m-10 0a10 10 0 1 0 20 0 10 10 0 1 0-20 0Z" fill="#ffffff"></path>
+            <path
+              d="M512 306.8c27.7 0 54.6 5.4 79.8 16.1 24.4 10.3 46.4 25.1 65.2 44s33.6 40.8 44 65.2c10.7 25.3 16.1 52.1 16.1 79.8 0 27.7-5.4 54.6-16.1 79.8-10.3 24.4-25.1 46.4-44 65.2-18.8 18.8-40.8 33.6-65.2 44-25.3 10.7-52.1 16.1-79.8 16.1-27.7 0-54.6-5.4-79.8-16.1-24.4-10.3-46.4-25.1-65.2-44-18.8-18.8-33.6-40.8-44-65.2-10.7-25.3-16.1-52.1-16.1-79.8 0-27.7 5.4-54.6 16.1-79.8 10.3-24.4 25.1-46.4 44-65.2s40.8-33.6 65.2-44c25.2-10.6 52.1-16.1 79.8-16.1m0-22c-125.4 0-227.1 101.7-227.1 227.1S386.6 739.1 512 739.1c125.4 0 227.1-101.7 227.1-227.1S637.4 284.8 512 284.8z"
+              fill="#ffffff"></path>
+            <path
+              d="M512 618.7c-58.9 0-106.8-47.9-106.8-106.8S453.1 405.1 512 405.1 618.8 453 618.8 511.9 570.9 618.7 512 618.7z m0-193.5c-47.9 0-86.8 38.9-86.8 86.8s38.9 86.8 86.8 86.8 86.8-38.9 86.8-86.8-38.9-86.8-86.8-86.8z"
+              fill="#ffffff"></path>
+            <path
+              d="M544.2 107.3l34.1 92.3 7.4 19.9 20.2 6.6c10.3 3.4 32.1 12.9 43.4 18.1l18.7 8.6 18.6-8.9 87.9-41.8 46.4 46.5-41.2 89.4-8.9 19.3 9.6 19c6.8 13.4 12.6 27.5 17.4 41.9l6.7 20.5 20.3 7.2 91.7 32.6v65.7l-92.3 34.1-19.9 7.4-6.6 20.2c-4.7 14.4-10.6 28.4-17.4 41.9l-9.8 19.3 9.3 19.5 41.8 87.9-46.5 46.5-89.1-41.3-19.3-8.9-19 9.6c-13.4 6.8-27.5 12.6-41.9 17.4l-20.5 6.7-7.2 20.3-32.6 91.7h-65.7l-34.1-92.3-7.4-19.9-20.2-6.6c-10.3-3.4-32.1-12.9-43.4-18.1L356 771l-18.6 8.9-87.9 41.8-46.4-46.5 41.2-89.3 8.9-19.3-9.6-19c-6.8-13.4-12.6-27.5-17.4-41.9l-6.7-20.5-20.3-7.2-91.7-32.6v-65.7l92.3-34.1 19.9-7.4 6.6-20.2c3.4-10.3 12.9-32.1 18.1-43.4l8.6-18.7-8.9-18.6-41.8-87.9 46.4-46.4 89.3 41.2 19.3 8.9 19-9.6c13.4-6.8 27.5-12.6 41.9-17.4l20.5-6.7 7.2-20.3 32.6-91.7h65.7m30.7-44.1H447.4l-43 121c-16.6 5.5-32.7 12.1-48.1 19.9l-117.2-54-90.1 90.1 55.2 116s-14.5 31.4-19.9 48.1l-121 44.7v127.4l121 43c5.5 16.6 12.1 32.6 19.9 48l-54 117.2 90.1 90.1 116-55.2s31.4 14.5 48.1 19.9l44.7 121h127.4l43-121c16.6-5.5 32.6-12.1 48-19.9l117.2 54 90.1-90.1-55.2-116c7.8-15.4 14.5-31.4 19.9-48l121-44.7V447.4l-121-43c-5.5-16.6-12.1-32.6-19.9-48l54-117.2-90.1-90.1-115.9 55.2s-31.5-14.5-48.1-19.9L574.9 63.3z"
+              fill="#ffffff"></path>
+          </g>
+        </svg>
+      </button>
+
+      <!-- Theme Icon -->
+      <button id="terminalIcon" class="w-full flex justify-center p-2 rounded hover:bg-slate-800 transition">
+        <svg width="32px" height="32px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#ffffff"
+          id="SVGRepo_bgCarrier" stroke-width="0"></g>
+          <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+          <g id="SVGRepo_iconCarrier">
+            <path
+              d="M21.5 3h-19A1.504 1.504 0 0 0 1 4.5v15A1.5 1.5 0 0 0 2.5 21h19a1.5 1.5 0 0 0 1.5-1.5v-15A1.504 1.504 0 0 0 21.5 3zm.5 16.5a.501.501 0 0 1-.5.5h-19a.501.501 0 0 1-.5-.5v-15a.506.506 0 0 1 .5-.5h19a.506.506 0 0 1 .5.5zM5.354 15.354l-.707-.707L7.793 11.5 4.646 8.354l.707-.707L9.207 11.5zM15 15h-5v-1h5z">
+            </path>
+            <path fill="none" d="M0 0h24v24H0z"></path>
+          </g>
+        </svg>
+      </button>
+
+      <!-- Profile Icon -->
+      <button id="profileIcon" class="w-full flex justify-center p-2 rounded hover:bg-slate-800 transition">
+        <svg width="32px" height="32px" viewBox="0 0 1024 1024" class="icon" version="1.1"
+          xmlns="http://www.w3.org/2000/svg" fill="#000000">
+          <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+          <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+          <g id="SVGRepo_iconCarrier">
+            <path d="M512 616.2m-10 0a10 10 0 1 0 20 0 10 10 0 1 0-20 0Z" fill="#969292"></path>
+            <path d="M511.6 656.9m-10 0a10 10 0 1 0 20 0 10 10 0 1 0-20 0Z" fill="#969292"></path>
+            <path d="M512.4 697.7m-10 0a10 10 0 1 0 20 0 10 10 0 1 0-20 0Z" fill="#969292"></path>
+            <path
+              d="M512 130.8c42.1 0 81.7 16.4 111.5 46.2s46.2 69.4 46.2 111.5-16.4 81.7-46.2 111.5c-29.8 29.8-69.4 46.2-111.5 46.2s-81.7-16.4-111.5-46.2c-29.8-29.8-46.2-69.4-46.2-111.5s16.4-81.7 46.2-111.5 69.4-46.2 111.5-46.2m0-44c-111.4 0-201.6 90.3-201.6 201.6C310.4 399.8 400.7 490 512 490c111.4 0 201.6-90.3 201.6-201.6S623.3 86.8 512 86.8zM512.3 523.5L84 681.4v255.7h856V681.4L512.3 523.5zM896 893.1H128V712.6l384.3-142.4L896 712.6v180.5z"
+              fill="#ffffff"></path>
+            <path
+              d="M555.4 585.3l-1.4-0.5v159.9c0 11.7-4.8 22.3-12.4 30-7.7 7.7-18.3 12.4-30 12.4-23.4 0-42.4-19-42.4-42.4V585.3l-1.4 0.5-14.6 5.2v153.8c0 32.2 26.2 58.4 58.4 58.4S570 777 570 744.8V590.5l-14.6-5.2z"
+              fill="#969292"></path>
+          </g>
+        </svg>
+      </button>
+    </div>
+
+
+
+
+
+
+    <!-- main sidebar -->
+    <div id="main-sidebar" class="side-bar w-6/20 bg-amber-100 min-h-screen p-4 border-r border-gray-300">
+      <h3 class="text-lg font-semibold mb-4">Projects</h3>
       <!-- input for project creating -->
-      <div class="flex items-center space-x-2">
-        <input type="text" class="border ring-1 ring-gray-300 rounded p-2" placeholder="Add item...">
-        <button class="bg-blue-500 text-white px-4 py-2 rounded">+</button>
+      <div class="flex items-center space-x-2 mb-4">
+        <input type="text" class="border ring-1 ring-gray-300 rounded p-2 w-6/7 focus:ring-blue-400 focus:outline-none"
+          placeholder="Add item...">
+        <button type="button" class="w-1/7 py-3 active:scale-95 transition text-sm text-white bg-indigo-500 rounded-sm">
+          +
+        </button>
       </div>
-
       <!-- all project here -->
-      <ul>
-        <li>learning sql for scratch</li>
-        <li>learning js from scratch</li>
-        <li>learning css from from scratch</li>
-        <li>learning nodejs from scratch</li>
+      <ul class="space-y-2">
+        <li class="flex justify-between items-center p-1 bg-white rounded shadow hover:bg-blue-50 cursor-pointer">
+          <p>learning js from scratch</p>
+          <button
+            class="w-1/7 py-2 active:scale-95 transition text-sm text-white bg-red-400 rounded-sm flex justify-center">
+            <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+              <g id="SVGRepo_iconCarrier">
+                <path fill-rule="evenodd" clip-rule="evenodd"
+                  d="M10.3094 2.25002H13.6908C13.9072 2.24988 14.0957 2.24976 14.2737 2.27819C14.977 2.39049 15.5856 2.82915 15.9146 3.46084C15.9978 3.62073 16.0573 3.79961 16.1256 4.00494L16.2373 4.33984C16.2562 4.39653 16.2616 4.41258 16.2661 4.42522C16.4413 4.90933 16.8953 5.23659 17.4099 5.24964C17.4235 5.24998 17.44 5.25004 17.5001 5.25004H20.5001C20.9143 5.25004 21.2501 5.58582 21.2501 6.00004C21.2501 6.41425 20.9143 6.75004 20.5001 6.75004H3.5C3.08579 6.75004 2.75 6.41425 2.75 6.00004C2.75 5.58582 3.08579 5.25004 3.5 5.25004H6.50008C6.56013 5.25004 6.5767 5.24998 6.59023 5.24964C7.10488 5.23659 7.55891 4.90936 7.73402 4.42524C7.73863 4.41251 7.74392 4.39681 7.76291 4.33984L7.87452 4.00496C7.94281 3.79964 8.00233 3.62073 8.08559 3.46084C8.41453 2.82915 9.02313 2.39049 9.72643 2.27819C9.90445 2.24976 10.093 2.24988 10.3094 2.25002ZM9.00815 5.25004C9.05966 5.14902 9.10531 5.04404 9.14458 4.93548C9.1565 4.90251 9.1682 4.86742 9.18322 4.82234L9.28302 4.52292C9.37419 4.24941 9.39519 4.19363 9.41601 4.15364C9.52566 3.94307 9.72853 3.79686 9.96296 3.75942C10.0075 3.75231 10.067 3.75004 10.3553 3.75004H13.6448C13.9331 3.75004 13.9927 3.75231 14.0372 3.75942C14.2716 3.79686 14.4745 3.94307 14.5842 4.15364C14.605 4.19363 14.626 4.2494 14.7171 4.52292L14.8169 4.82216L14.8556 4.9355C14.8949 5.04405 14.9405 5.14902 14.992 5.25004H9.00815Z"
+                  fill="#ffffff"></path>
+                <path
+                  d="M5.91509 8.45015C5.88754 8.03685 5.53016 7.72415 5.11686 7.7517C4.70357 7.77925 4.39086 8.13663 4.41841 8.54993L4.88186 15.5017C4.96736 16.7844 5.03642 17.8205 5.19839 18.6336C5.36679 19.4789 5.65321 20.185 6.2448 20.7385C6.8364 21.2919 7.55995 21.5308 8.4146 21.6425C9.23662 21.7501 10.275 21.7501 11.5606 21.75H12.4395C13.7251 21.7501 14.7635 21.7501 15.5856 21.6425C16.4402 21.5308 17.1638 21.2919 17.7554 20.7385C18.347 20.185 18.6334 19.4789 18.8018 18.6336C18.9638 17.8206 19.0328 16.7844 19.1183 15.5017L19.5818 8.54993C19.6093 8.13663 19.2966 7.77925 18.8833 7.7517C18.47 7.72415 18.1126 8.03685 18.0851 8.45015L17.6251 15.3493C17.5353 16.6971 17.4713 17.6349 17.3307 18.3406C17.1943 19.025 17.004 19.3873 16.7306 19.6431C16.4572 19.8989 16.083 20.0647 15.391 20.1552C14.6776 20.2485 13.7376 20.25 12.3868 20.25H11.6134C10.2626 20.25 9.32255 20.2485 8.60915 20.1552C7.91715 20.0647 7.54299 19.8989 7.26958 19.6431C6.99617 19.3873 6.80583 19.025 6.66948 18.3406C6.52892 17.6349 6.46489 16.6971 6.37503 15.3493L5.91509 8.45015Z"
+                  fill="#ffffff"></path>
+                <path
+                  d="M9.42546 10.2538C9.83762 10.2125 10.2052 10.5133 10.2464 10.9254L10.7464 15.9254C10.7876 16.3376 10.4869 16.7051 10.0747 16.7463C9.66256 16.7875 9.29503 16.4868 9.25381 16.0747L8.75381 11.0747C8.7126 10.6625 9.01331 10.295 9.42546 10.2538Z"
+                  fill="#ffffff"></path>
+                <path
+                  d="M14.5747 10.2538C14.9869 10.295 15.2876 10.6625 15.2464 11.0747L14.7464 16.0747C14.7052 16.4868 14.3376 16.7875 13.9255 16.7463C13.5133 16.7051 13.2126 16.3376 13.2538 15.9254L13.7538 10.9254C13.795 10.5133 14.1626 10.2125 14.5747 10.2538Z"
+                  fill="#ffffff"></path>
+              </g>
+            </svg>
+          </button>
+        </li>
+        <li class="flex justify-between items-center p-1 bg-white rounded shadow hover:bg-blue-50 cursor-pointer">
+          <p>learning css from scratch</p>
+          <button
+            class="w-1/7 py-2 active:scale-95 transition text-sm text-white bg-red-400 rounded-sm flex justify-center">
+            <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+              <g id="SVGRepo_iconCarrier">
+                <path fill-rule="evenodd" clip-rule="evenodd"
+                  d="M10.3094 2.25002H13.6908C13.9072 2.24988 14.0957 2.24976 14.2737 2.27819C14.977 2.39049 15.5856 2.82915 15.9146 3.46084C15.9978 3.62073 16.0573 3.79961 16.1256 4.00494L16.2373 4.33984C16.2562 4.39653 16.2616 4.41258 16.2661 4.42522C16.4413 4.90933 16.8953 5.23659 17.4099 5.24964C17.4235 5.24998 17.44 5.25004 17.5001 5.25004H20.5001C20.9143 5.25004 21.2501 5.58582 21.2501 6.00004C21.2501 6.41425 20.9143 6.75004 20.5001 6.75004H3.5C3.08579 6.75004 2.75 6.41425 2.75 6.00004C2.75 5.58582 3.08579 5.25004 3.5 5.25004H6.50008C6.56013 5.25004 6.5767 5.24998 6.59023 5.24964C7.10488 5.23659 7.55891 4.90936 7.73402 4.42524C7.73863 4.41251 7.74392 4.39681 7.76291 4.33984L7.87452 4.00496C7.94281 3.79964 8.00233 3.62073 8.08559 3.46084C8.41453 2.82915 9.02313 2.39049 9.72643 2.27819C9.90445 2.24976 10.093 2.24988 10.3094 2.25002ZM9.00815 5.25004C9.05966 5.14902 9.10531 5.04404 9.14458 4.93548C9.1565 4.90251 9.1682 4.86742 9.18322 4.82234L9.28302 4.52292C9.37419 4.24941 9.39519 4.19363 9.41601 4.15364C9.52566 3.94307 9.72853 3.79686 9.96296 3.75942C10.0075 3.75231 10.067 3.75004 10.3553 3.75004H13.6448C13.9331 3.75004 13.9927 3.75231 14.0372 3.75942C14.2716 3.79686 14.4745 3.94307 14.5842 4.15364C14.605 4.19363 14.626 4.2494 14.7171 4.52292L14.8169 4.82216L14.8556 4.9355C14.8949 5.04405 14.9405 5.14902 14.992 5.25004H9.00815Z"
+                  fill="#ffffff"></path>
+                <path
+                  d="M5.91509 8.45015C5.88754 8.03685 5.53016 7.72415 5.11686 7.7517C4.70357 7.77925 4.39086 8.13663 4.41841 8.54993L4.88186 15.5017C4.96736 16.7844 5.03642 17.8205 5.19839 18.6336C5.36679 19.4789 5.65321 20.185 6.2448 20.7385C6.8364 21.2919 7.55995 21.5308 8.4146 21.6425C9.23662 21.7501 10.275 21.7501 11.5606 21.75H12.4395C13.7251 21.7501 14.7635 21.7501 15.5856 21.6425C16.4402 21.5308 17.1638 21.2919 17.7554 20.7385C18.347 20.185 18.6334 19.4789 18.8018 18.6336C18.9638 17.8206 19.0328 16.7844 19.1183 15.5017L19.5818 8.54993C19.6093 8.13663 19.2966 7.77925 18.8833 7.7517C18.47 7.72415 18.1126 8.03685 18.0851 8.45015L17.6251 15.3493C17.5353 16.6971 17.4713 17.6349 17.3307 18.3406C17.1943 19.025 17.004 19.3873 16.7306 19.6431C16.4572 19.8989 16.083 20.0647 15.391 20.1552C14.6776 20.2485 13.7376 20.25 12.3868 20.25H11.6134C10.2626 20.25 9.32255 20.2485 8.60915 20.1552C7.91715 20.0647 7.54299 19.8989 7.26958 19.6431C6.99617 19.3873 6.80583 19.025 6.66948 18.3406C6.52892 17.6349 6.46489 16.6971 6.37503 15.3493L5.91509 8.45015Z"
+                  fill="#ffffff"></path>
+                <path
+                  d="M9.42546 10.2538C9.83762 10.2125 10.2052 10.5133 10.2464 10.9254L10.7464 15.9254C10.7876 16.3376 10.4869 16.7051 10.0747 16.7463C9.66256 16.7875 9.29503 16.4868 9.25381 16.0747L8.75381 11.0747C8.7126 10.6625 9.01331 10.295 9.42546 10.2538Z"
+                  fill="#ffffff"></path>
+                <path
+                  d="M14.5747 10.2538C14.9869 10.295 15.2876 10.6625 15.2464 11.0747L14.7464 16.0747C14.7052 16.4868 14.3376 16.7875 13.9255 16.7463C13.5133 16.7051 13.2126 16.3376 13.2538 15.9254L13.7538 10.9254C13.795 10.5133 14.1626 10.2125 14.5747 10.2538Z"
+                  fill="#ffffff"></path>
+              </g>
+            </svg>
+          </button>
+        </li>
+        <li class="flex justify-between items-center p-1 bg-white rounded shadow hover:bg-blue-50 cursor-pointer">
+          <p>learning nodejs from scratch</p>
+          <button
+            class="w-1/7 py-2 active:scale-95 transition text-sm text-white bg-red-400 rounded-sm flex justify-center">
+            <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+              <g id="SVGRepo_iconCarrier">
+                <path fill-rule="evenodd" clip-rule="evenodd"
+                  d="M10.3094 2.25002H13.6908C13.9072 2.24988 14.0957 2.24976 14.2737 2.27819C14.977 2.39049 15.5856 2.82915 15.9146 3.46084C15.9978 3.62073 16.0573 3.79961 16.1256 4.00494L16.2373 4.33984C16.2562 4.39653 16.2616 4.41258 16.2661 4.42522C16.4413 4.90933 16.8953 5.23659 17.4099 5.24964C17.4235 5.24998 17.44 5.25004 17.5001 5.25004H20.5001C20.9143 5.25004 21.2501 5.58582 21.2501 6.00004C21.2501 6.41425 20.9143 6.75004 20.5001 6.75004H3.5C3.08579 6.75004 2.75 6.41425 2.75 6.00004C2.75 5.58582 3.08579 5.25004 3.5 5.25004H6.50008C6.56013 5.25004 6.5767 5.24998 6.59023 5.24964C7.10488 5.23659 7.55891 4.90936 7.73402 4.42524C7.73863 4.41251 7.74392 4.39681 7.76291 4.33984L7.87452 4.00496C7.94281 3.79964 8.00233 3.62073 8.08559 3.46084C8.41453 2.82915 9.02313 2.39049 9.72643 2.27819C9.90445 2.24976 10.093 2.24988 10.3094 2.25002ZM9.00815 5.25004C9.05966 5.14902 9.10531 5.04404 9.14458 4.93548C9.1565 4.90251 9.1682 4.86742 9.18322 4.82234L9.28302 4.52292C9.37419 4.24941 9.39519 4.19363 9.41601 4.15364C9.52566 3.94307 9.72853 3.79686 9.96296 3.75942C10.0075 3.75231 10.067 3.75004 10.3553 3.75004H13.6448C13.9331 3.75004 13.9927 3.75231 14.0372 3.75942C14.2716 3.79686 14.4745 3.94307 14.5842 4.15364C14.605 4.19363 14.626 4.2494 14.7171 4.52292L14.8169 4.82216L14.8556 4.9355C14.8949 5.04405 14.9405 5.14902 14.992 5.25004H9.00815Z"
+                  fill="#ffffff"></path>
+                <path
+                  d="M5.91509 8.45015C5.88754 8.03685 5.53016 7.72415 5.11686 7.7517C4.70357 7.77925 4.39086 8.13663 4.41841 8.54993L4.88186 15.5017C4.96736 16.7844 5.03642 17.8205 5.19839 18.6336C5.36679 19.4789 5.65321 20.185 6.2448 20.7385C6.8364 21.2919 7.55995 21.5308 8.4146 21.6425C9.23662 21.7501 10.275 21.7501 11.5606 21.75H12.4395C13.7251 21.7501 14.7635 21.7501 15.5856 21.6425C16.4402 21.5308 17.1638 21.2919 17.7554 20.7385C18.347 20.185 18.6334 19.4789 18.8018 18.6336C18.9638 17.8206 19.0328 16.7844 19.1183 15.5017L19.5818 8.54993C19.6093 8.13663 19.2966 7.77925 18.8833 7.7517C18.47 7.72415 18.1126 8.03685 18.0851 8.45015L17.6251 15.3493C17.5353 16.6971 17.4713 17.6349 17.3307 18.3406C17.1943 19.025 17.004 19.3873 16.7306 19.6431C16.4572 19.8989 16.083 20.0647 15.391 20.1552C14.6776 20.2485 13.7376 20.25 12.3868 20.25H11.6134C10.2626 20.25 9.32255 20.2485 8.60915 20.1552C7.91715 20.0647 7.54299 19.8989 7.26958 19.6431C6.99617 19.3873 6.80583 19.025 6.66948 18.3406C6.52892 17.6349 6.46489 16.6971 6.37503 15.3493L5.91509 8.45015Z"
+                  fill="#ffffff"></path>
+                <path
+                  d="M9.42546 10.2538C9.83762 10.2125 10.2052 10.5133 10.2464 10.9254L10.7464 15.9254C10.7876 16.3376 10.4869 16.7051 10.0747 16.7463C9.66256 16.7875 9.29503 16.4868 9.25381 16.0747L8.75381 11.0747C8.7126 10.6625 9.01331 10.295 9.42546 10.2538Z"
+                  fill="#ffffff"></path>
+                <path
+                  d="M14.5747 10.2538C14.9869 10.295 15.2876 10.6625 15.2464 11.0747L14.7464 16.0747C14.7052 16.4868 14.3376 16.7875 13.9255 16.7463C13.5133 16.7051 13.2126 16.3376 13.2538 15.9254L13.7538 10.9254C13.795 10.5133 14.1626 10.2125 14.5747 10.2538Z"
+                  fill="#ffffff"></path>
+              </g>
+            </svg>
+          </button>
+        </li>
       </ul>
     </div>
 
 
 
+
+
+
     <!-- main-bar -->
-    <div class="content-bar w-7/9 bg-amber-200 min-h-screen">
-      <h2>Learning SQL from scratch</h2>
-
+    <div class="content-bar w-13/10 bg-amber-200 min-h-screen p-5 ">
+      <h2 class="text-xl font-bold mb-4">Learning SQL from scratch</h2>
       <!-- input box for add task or step or module -->
-      <div class="flex items-center space-x-2">
-        <input type="text" class="border ring-1 ring-gray-300 rounded p-2" placeholder="Add item...">
-        <button class="bg-blue-500 text-white px-4 py-2 rounded">+</button>
+      <div class="flex items-center space-x-2 mb-4">
+        <input type="text" class="border ring-1 ring-gray-300 rounded p-2 w-full focus:ring-blue-400 focus:outline-none"
+          placeholder="Add item...">
+        <button type="button" class="w-1/7 py-3 active:scale-95 transition text-sm text-white bg-indigo-500 rounded-sm">
+          +
+        </button>
       </div>
-
       <!-- All task for selected project -->
       <div>
-        <ul>
-          <li></li>
-          <li></li>
+        <ul class="space-y-3">
+          <!-- title & information -->
+          <li class="p-3 bg-white rounded shadow flex justify-between items-center">
+            <span>1st chapter: internal pointer variable</span>
+            <span class="flex items-center space-x-3">
+              <p class="text-sm text-gray-600">pending</p>
+              <button class="text-red-500 hover:text-red-700">🗑️</button>
+            </span>
+          </li>
+          <li class="p-3 bg-white rounded shadow flex justify-between items-center">
+            <span>1st chapter: internal pointer variable</span>
+            <span class="flex items-center space-x-3">
+              <p class="text-sm text-gray-600">pending</p>
+              <button class="text-red-500 hover:text-red-700">🗑️</button>
+            </span>
+          </li>
+          <li class="p-3 bg-white rounded shadow flex justify-between items-center">
+            <span>1st chapter: internal pointer variable</span>
+            <span class="flex items-center space-x-3">
+              <p class="text-sm text-gray-600">pending</p>
+              <button class="text-red-500 hover:text-red-700">🗑️</button>
+            </span>
+          </li>
+          <li class="p-3 bg-white rounded shadow flex justify-between items-center">
+            <span>1st chapter: internal pointer variable</span>
+            <span class="flex items-center space-x-3">
+              <p class="text-sm text-gray-600">pending</p>
+              <button class="text-red-500 hover:text-red-700">🗑️</button>
+            </span>
+          </li>
+        </ul>
+        <ul class="space-y-3">
+          <!-- title & information -->
+          <li class="p-3 bg-white rounded shadow flex justify-between items-center">
+            <span>1st chapter: internal pointer variable</span>
+            <span class="flex items-center space-x-3">
+              <p class="text-sm text-gray-600">pending</p>
+              <button class="text-red-500 hover:text-red-700">🗑️</button>
+            </span>
+          </li>
+          <li class="p-3 bg-white rounded shadow flex justify-between items-center">
+            <span>1st chapter: internal pointer variable</span>
+            <span class="flex items-center space-x-3">
+              <p class="text-sm text-gray-600">pending</p>
+              <button class="text-red-500 hover:text-red-700">🗑️</button>
+            </span>
+          </li>
+          <li class="p-3 bg-white rounded shadow flex justify-between items-center">
+            <span>1st chapter: internal pointer variable</span>
+            <span class="flex items-center space-x-3">
+              <p class="text-sm text-gray-600">pending</p>
+              <button class="text-red-500 hover:text-red-700">🗑️</button>
+            </span>
+          </li>
+          <li class="p-3 bg-white rounded shadow flex justify-between items-center">
+            <span>1st chapter: internal pointer variable</span>
+            <span class="flex items-center space-x-3">
+              <p class="text-sm text-gray-600">pending</p>
+              <button class="text-red-500 hover:text-red-700">🗑️</button>
+            </span>
+          </li>
+        </ul>
+        <ul class="space-y-3">
+          <!-- title & information -->
+          <li class="p-3 bg-white rounded shadow flex justify-between items-center">
+            <span>1st chapter: internal pointer variable</span>
+            <span class="flex items-center space-x-3">
+              <p class="text-sm text-gray-600">pending</p>
+              <button class="text-red-500 hover:text-red-700">🗑️</button>
+            </span>
+          </li>
+          <li class="p-3 bg-white rounded shadow flex justify-between items-center">
+            <span>1st chapter: internal pointer variable</span>
+            <span class="flex items-center space-x-3">
+              <p class="text-sm text-gray-600">pending</p>
+              <button class="text-red-500 hover:text-red-700">🗑️</button>
+            </span>
+          </li>
+          <li class="p-3 bg-white rounded shadow flex justify-between items-center">
+            <span>1st chapter: internal pointer variable</span>
+            <span class="flex items-center space-x-3">
+              <p class="text-sm text-gray-600">pending</p>
+              <button class="text-red-500 hover:text-red-700">🗑️</button>
+            </span>
+          </li>
+          <li class="p-3 bg-white rounded shadow flex justify-between items-center">
+            <span>1st chapter: internal pointer variable</span>
+            <span class="flex items-center space-x-3">
+              <p class="text-sm text-gray-600">pending</p>
+              <button class="text-red-500 hover:text-red-700">🗑️</button>
+            </span>
+          </li>
+        </ul>
+        <ul class="space-y-3">
+          <!-- title & information -->
+          <li class="p-3 bg-white rounded shadow flex justify-between items-center">
+            <span>1st chapter: internal pointer variable</span>
+            <span class="flex items-center space-x-3">
+              <p class="text-sm text-gray-600">pending</p>
+              <button class="text-red-500 hover:text-red-700">🗑️</button>
+            </span>
+          </li>
+          <li class="p-3 bg-white rounded shadow flex justify-between items-center">
+            <span>1st chapter: internal pointer variable</span>
+            <span class="flex items-center space-x-3">
+              <p class="text-sm text-gray-600">pending</p>
+              <button class="text-red-500 hover:text-red-700">🗑️</button>
+            </span>
+          </li>
+          <li class="p-3 bg-white rounded shadow flex justify-between items-center">
+            <span>1st chapter: internal pointer variable</span>
+            <span class="flex items-center space-x-3">
+              <p class="text-sm text-gray-600">pending</p>
+              <button class="text-red-500 hover:text-red-700">🗑️</button>
+            </span>
+          </li>
+          <li class="p-3 bg-white rounded shadow flex justify-between items-center">
+            <span>1st chapter: internal pointer variable</span>
+            <span class="flex items-center space-x-3">
+              <p class="text-sm text-gray-600">pending</p>
+              <button class="text-red-500 hover:text-red-700">🗑️</button>
+            </span>
+          </li>
+        </ul>
+        <ul class="space-y-3">
+          <!-- title & information -->
+          <li class="p-3 bg-white rounded shadow flex justify-between items-center">
+            <span>1st chapter: internal pointer variable</span>
+            <span class="flex items-center space-x-3">
+              <p class="text-sm text-gray-600">pending</p>
+              <button class="text-red-500 hover:text-red-700">🗑️</button>
+            </span>
+          </li>
+          <li class="p-3 bg-white rounded shadow flex justify-between items-center">
+            <span>1st chapter: internal pointer variable</span>
+            <span class="flex items-center space-x-3">
+              <p class="text-sm text-gray-600">pending</p>
+              <button class="text-red-500 hover:text-red-700">🗑️</button>
+            </span>
+          </li>
+          <li class="p-3 bg-white rounded shadow flex justify-between items-center">
+            <span>1st chapter: internal pointer variable</span>
+            <span class="flex items-center space-x-3">
+              <p class="text-sm text-gray-600">pending</p>
+              <button class="text-red-500 hover:text-red-700">🗑️</button>
+            </span>
+          </li>
+          <li class="p-3 bg-white rounded shadow flex justify-between items-center">
+            <span>1st chapter: internal pointer variable</span>
+            <span class="flex items-center space-x-3">
+              <p class="text-sm text-gray-600">pending</p>
+              <button class="text-red-500 hover:text-red-700">🗑️</button>
+            </span>
+          </li>
+        </ul>
+        <ul class="space-y-3">
+          <!-- title & information -->
+          <li class="p-3 bg-white rounded shadow flex justify-between items-center">
+            <span>1st chapter: internal pointer variable</span>
+            <span class="flex items-center space-x-3">
+              <p class="text-sm text-gray-600">pending</p>
+              <button class="text-red-500 hover:text-red-700">🗑️</button>
+            </span>
+          </li>
+          <li class="p-3 bg-white rounded shadow flex justify-between items-center">
+            <span>1st chapter: internal pointer variable</span>
+            <span class="flex items-center space-x-3">
+              <p class="text-sm text-gray-600">pending</p>
+              <button class="text-red-500 hover:text-red-700">🗑️</button>
+            </span>
+          </li>
+          <li class="p-3 bg-white rounded shadow flex justify-between items-center">
+            <span>1st chapter: internal pointer variable</span>
+            <span class="flex items-center space-x-3">
+              <p class="text-sm text-gray-600">pending</p>
+              <button class="text-red-500 hover:text-red-700">🗑️</button>
+            </span>
+          </li>
+          <li class="p-3 bg-white rounded shadow flex justify-between items-center">
+            <span>1st chapter: internal pointer variable</span>
+            <span class="flex items-center space-x-3">
+              <p class="text-sm text-gray-600">pending</p>
+              <button class="text-red-500 hover:text-red-700">🗑️</button>
+            </span>
+          </li>
+        </ul>
+        <ul class="space-y-3">
+          <!-- title & information -->
+          <li class="p-3 bg-white rounded shadow flex justify-between items-center">
+            <span>1st chapter: internal pointer variable</span>
+            <span class="flex items-center space-x-3">
+              <p class="text-sm text-gray-600">pending</p>
+              <button class="text-red-500 hover:text-red-700">🗑️</button>
+            </span>
+          </li>
+          <li class="p-3 bg-white rounded shadow flex justify-between items-center">
+            <span>1st chapter: internal pointer variable</span>
+            <span class="flex items-center space-x-3">
+              <p class="text-sm text-gray-600">pending</p>
+              <button class="text-red-500 hover:text-red-700">🗑️</button>
+            </span>
+          </li>
+          <li class="p-3 bg-white rounded shadow flex justify-between items-center">
+            <span>1st chapter: internal pointer variable</span>
+            <span class="flex items-center space-x-3">
+              <p class="text-sm text-gray-600">pending</p>
+              <button class="text-red-500 hover:text-red-700">🗑️</button>
+            </span>
+          </li>
+          <li class="p-3 bg-white rounded shadow flex justify-between items-center">
+            <span>1st chapter: internal pointer variable</span>
+            <span class="flex items-center space-x-3">
+              <p class="text-sm text-gray-600">pending</p>
+              <button class="text-red-500 hover:text-red-700">🗑️</button>
+            </span>
+          </li>
+        </ul>
+        <ul class="space-y-3">
+          <!-- title & information -->
+          <li class="p-3 bg-white rounded shadow flex justify-between items-center">
+            <span>1st chapter: internal pointer variable</span>
+            <span class="flex items-center space-x-3">
+              <p class="text-sm text-gray-600">pending</p>
+              <button class="text-red-500 hover:text-red-700">🗑️</button>
+            </span>
+          </li>
+          <li class="p-3 bg-white rounded shadow flex justify-between items-center">
+            <span>1st chapter: internal pointer variable</span>
+            <span class="flex items-center space-x-3">
+              <p class="text-sm text-gray-600">pending</p>
+              <button class="text-red-500 hover:text-red-700">🗑️</button>
+            </span>
+          </li>
+          <li class="p-3 bg-white rounded shadow flex justify-between items-center">
+            <span>1st chapter: internal pointer variable</span>
+            <span class="flex items-center space-x-3">
+              <p class="text-sm text-gray-600">pending</p>
+              <button class="text-red-500 hover:text-red-700">🗑️</button>
+            </span>
+          </li>
+          <li class="p-3 bg-white rounded shadow flex justify-between items-center">
+            <span>1st chapter: internal pointer variable</span>
+            <span class="flex items-center space-x-3">
+              <p class="text-sm text-gray-600">pending</p>
+              <button class="text-red-500 hover:text-red-700">🗑️</button>
+            </span>
+          </li>
         </ul>
       </div>
     </div>
+
+
+
 
   </div>
   <script type="module" src="./src/main.js"></script>
