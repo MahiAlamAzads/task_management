@@ -44,8 +44,13 @@ router.post('/:projectId', authMiddleware, async function (req, res, next) {
         error: "project dont exist!"
       })
     }
-    // ownership ends
 
+    if (project.user.toString() !== user) {
+      return res.status(403).json({
+        error: "unauthorized creation"
+      })
+    }
+    // ownership ends
 
     const data_to_save = new Task({
       title: title,
@@ -55,8 +60,9 @@ router.post('/:projectId', authMiddleware, async function (req, res, next) {
     await data_to_save.save();
 
     res.status(201).json({
-      message: "Task created Successfully"
-    })
+      message: "Task created successfully",
+      task: data_to_save
+    });
   } catch (error) {
     res.status(500).json({
       error: error.message
@@ -64,13 +70,50 @@ router.post('/:projectId', authMiddleware, async function (req, res, next) {
   }
 });
 
-router.get('/', authMiddleware, async function (req, res, next) {
+router.get('/:projectId', authMiddleware, async function (req, res, next) {
+  // i will add seach query here
   try {
-    const query = req.query;
-    console.log(query);
 
-    const result = await Project.find({ user: req.user.userId })
-    res.status(201).json({
+    const { projectId } = req.params;
+    if (!mongoose.Types.ObjectId.isValid(projectId)) {
+      return res.status(400).json({ error: "Invalid project ID" });
+    }
+
+    const user = req.user.userId;
+
+    // ownership starts
+    const project = await Project.findOne({
+      _id: projectId,
+      user
+    });
+    if (!project) {
+      return res.status(404).json({
+        error: "project dont exist!"
+      })
+    }
+    // ownership ends
+
+    // query starts here
+    const query = {};
+    if (req.query.status) {
+      query.status = req.query.status;
+    }
+    if (req.query.title) {
+      if (req.query.title.length > 50) {
+        return res.status(400).json({ error: "Title too long" });
+      }
+      query.title = { $regex: `^${req.query.title}`, $options: "i" };
+    }
+
+    /**I can also add date query later */
+    // query ends here
+
+    const result = await Task.find({
+      project: projectId,
+      ...query
+    });
+
+    res.status(200).json({
       result
     })
   } catch (error) {
@@ -80,29 +123,61 @@ router.get('/', authMiddleware, async function (req, res, next) {
   }
 });
 
-router.delete('/:projectId', authMiddleware, async function (req, res, next) {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+router.delete('/:projectId/:taskId', authMiddleware, async function (req, res, next) {
   try {
-    const { projectId } = req.params;
+    const { projectId, taskId } = req.params;
 
     // this beautiful thing
     if (!mongoose.Types.ObjectId.isValid(projectId)) {
       return res.status(400).json({ error: "Invalid project ID" });
     }
 
-    // we can create a helper function for checking owner
-    const existingProject = await Project.findById(projectId);
-    if (!existingProject) {
+    const user = req.user.userId;
+
+    // ownership starts
+    const project = await Project.findOne({
+      _id: projectId,
+      user
+    });
+    if (!project) {
       return res.status(404).json({
-        res: "Couldnt Find Project"
-      });
-    };
-    // checking ownership here
-    if (existingProject.user.toString() !== req.user.userId) {
-      return res.status(403).json({ error: "Forbidden: you are not the owner" });
+        error: "project dont exist!"
+      })
     }
-    await existingProject.deleteOne();
+    // ownership ends
+    const result = await Task.findOneAndDelete({
+      _id: taskId,
+      project: projectId
+    });
+
+    if (!result) {
+      return res.status(404).json({
+        message: `resourse didn't found`
+      });
+    }
+
     res.status(200).json({
-      message: `'${existingProject.title}' is deleted successfully`
+      message: `'${result.title}' is deleted successfully`
     });
   } catch (error) {
     res.status(500).json({
@@ -110,6 +185,17 @@ router.delete('/:projectId', authMiddleware, async function (req, res, next) {
     })
   }
 });
+
+
+
+
+
+
+
+
+
+
+
 
 router.patch("/:projectId", authMiddleware, async (req, res) => {
   try {
