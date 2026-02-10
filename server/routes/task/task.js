@@ -147,6 +147,10 @@ router.delete('/:projectId/:taskId', authMiddleware, async function (req, res, n
   try {
     const { projectId, taskId } = req.params;
 
+    if (!mongoose.Types.ObjectId.isValid(taskId)) {
+      return res.status(400).json({ error: "Invalid task ID" });
+    }
+
     // this beautiful thing
     if (!mongoose.Types.ObjectId.isValid(projectId)) {
       return res.status(400).json({ error: "Invalid project ID" });
@@ -161,7 +165,7 @@ router.delete('/:projectId/:taskId', authMiddleware, async function (req, res, n
     });
     if (!project) {
       return res.status(404).json({
-        error: "project dont exist!"
+        error: "Project not found or unauthorized"
       })
     }
     // ownership ends
@@ -172,7 +176,7 @@ router.delete('/:projectId/:taskId', authMiddleware, async function (req, res, n
 
     if (!result) {
       return res.status(404).json({
-        message: `resourse didn't found`
+        message: "Resource not found"
       });
     }
 
@@ -197,10 +201,10 @@ router.delete('/:projectId/:taskId', authMiddleware, async function (req, res, n
 
 
 
-router.patch("/:projectId", authMiddleware, async (req, res) => {
+router.patch("/:projectId/:taskId", authMiddleware, async (req, res) => {
   try {
-    const { title, comment } = req.body;
-    const { projectId } = req.params;
+    const { title, comment, status } = req.body;
+    const { projectId, taskId } = req.params;
 
     // 1️⃣ Validate projectId
     if (!mongoose.Types.ObjectId.isValid(projectId)) {
@@ -224,27 +228,45 @@ router.patch("/:projectId", authMiddleware, async (req, res) => {
       updateData.comment = comment;
     }
 
+    if (status !== undefined) {
+      if (typeof status !== "string") {
+        return res.status(400).json({ error: "Invalid status field" });
+      }
+      updateData.status = status;
+    }
+
+    // beautiful
     if (Object.keys(updateData).length === 0) {
       return res.status(400).json({ error: "Nothing to update" });
     }
 
-    // 3️⃣ Atomic update + ownership check
-    const updatedProject = await Project.findOneAndUpdate(
-      { _id: projectId, user: req.user.userId },
-      { $set: updateData },
+    // ownership starts 
+    const isOwner = await Project.findOne(
+      { _id: projectId, user: req.user.userId }
+    );
+    if (!isOwner) {
+      return res.status(403).json({
+        error: "Project couldn't found or unauthorized"
+      })
+    }
+    // owner ends
+    const updatedTask = await Task.findOneAndUpdate(
+      { _id: taskId, project: projectId },
+      updateData,
       { new: true, runValidators: true }
     );
 
-    if (!updatedProject) {
+
+    if (!updatedTask) {
       return res
         .status(404)
-        .json({ error: "Project not found or you don't have permission" });
+        .json({ error: "task not found" });
     }
 
     // 4️⃣ Success response
     res.status(200).json({
       message: "Updated successfully",
-      updatedProject,
+      updatedTask,
     });
   } catch (error) {
     res.status(500).json({ error: error.message });
