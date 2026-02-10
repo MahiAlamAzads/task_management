@@ -1,11 +1,20 @@
 const express = require("express")
 const router = express.Router()
+const rateLimit = require('express-rate-limit');
 const authMiddleware = require("../../middlewares/isAuthenticate.middleware");
 const Task = require("../../model/Task.model");
 const mongoose = require("mongoose");
 const Project = require("../../model/Project.model");
 
-router.post('/:projectId', authMiddleware, async function (req, res, next) {
+// rate limitation start here
+const taskLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  limit: 100,
+  message: { error: "Too many requests" }
+});
+// rate limitation end here
+
+router.post('/:projectId', authMiddleware, taskLimiter, async function (req, res, next) {
   try {
     const { title } = req.body;
     const { projectId } = req.params;
@@ -14,7 +23,7 @@ router.post('/:projectId', authMiddleware, async function (req, res, next) {
     // validation starts
     if (!title) {
       return res.status(400).json({
-        message: "Please, Fill the title"
+        error: "Please, Fill the title"
       });
     }
 
@@ -234,8 +243,9 @@ router.patch("/:projectId/:taskId", authMiddleware, async (req, res) => {
     }
 
     if (status !== undefined) {
-      if (typeof status !== "string") {
-        return res.status(400).json({ error: "Invalid status field" });
+      const validStatuses = ["In-progress", "pending", "done"];
+      if (!validStatuses.includes(status)) {
+        return res.status(400).json({ error: "Invalid status value" });
       }
       updateData.status = status;
     }
