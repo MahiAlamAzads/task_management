@@ -4,9 +4,6 @@ const { verifyToken } = require("../helper/jwt");
 function authMiddleware(req, res, next) {
   const authHeader = req.headers["authorization"];
 
-  //test console
-  console.log(authHeader)
-
   if (!authHeader) return res.status(401).json({ error: "No token provided" });
 
   const token = authHeader.split(" ")[1];
@@ -14,7 +11,6 @@ function authMiddleware(req, res, next) {
 
   try {
     const decoded = verifyToken(token);
-    console.log(decoded)
     req.user = decoded;
     /*
      this line: req.user = decoded;

@@ -55,21 +55,18 @@ async function loginController(req, res) {
 
     // 2️⃣ Check if user already exists
     const existingUser = await User.findOne({ email });
-    console.log(existingUser);
     if (!existingUser) {
       return res.status(409).json({ error: "User not found" });
     }
 
     // 3️⃣ Compare password
     const isPasswordValid = await comparePassword(password, existingUser.password);
-    console.log(isPasswordValid)
     if (!isPasswordValid) {
       return res.status(401).json({ error: "Invalid password" });
     }
 
     // 4 Generate JWT token
     const token = generateToken({ userId: existingUser._id, email: existingUser.email });
-    console.log(token)
     // 5️⃣ Send response
     res.status(200).json({
       message: "User logged in successfully",

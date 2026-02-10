@@ -37,7 +37,6 @@ router.post('/', authMiddleware, async function (req, res, next) {
 router.get('/', authMiddleware, async function (req, res, next) {
     try {
         const query = req.query;
-        console.log(query);
 
         const result = await Project.find({ user: req.user.userId })
         res.status(201).json({
