@@ -21,6 +21,7 @@ visualize:
   "updatedAt": "2026-02-08T17:15:00.000Z"
 }
  */
+const mongoose = require("mongoose")
 
 const taskSchema = new mongoose.Schema({
   title: { type: String, required: true },
@@ -39,3 +40,5 @@ const taskSchema = new mongoose.Schema({
     required: true
   }
 }, { timestamps: true })
+
+module.exports = mongoose.model("Task", taskSchema);

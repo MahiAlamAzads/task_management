@@ -14,6 +14,7 @@ function authMiddleware(req, res, next) {
 
   try {
     const decoded = verifyToken(token);
+    console.log(decoded)
     req.user = decoded;
     /*
      this line: req.user = decoded;
