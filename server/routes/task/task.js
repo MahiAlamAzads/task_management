@@ -206,14 +206,19 @@ router.patch("/:projectId/:taskId", authMiddleware, async (req, res) => {
     const { title, comment, status } = req.body;
     const { projectId, taskId } = req.params;
 
-    // 1️⃣ Validate projectId
+    // validating project and task id start...
     if (!mongoose.Types.ObjectId.isValid(projectId)) {
       return res.status(400).json({ error: "Invalid project ID" });
     }
+    if (!mongoose.Types.ObjectId.isValid(taskId)) {
+      return res.status(400).json({ error: "Invalid project ID" });
+    }
+    // validating project and task id start
 
-    // 2️⃣ Build update object safely
+    // this obj for executing to update
     const updateData = {};
 
+    // validation and adding updateData obj. start here
     if (title !== undefined) {
       if (typeof title !== "string") {
         return res.status(400).json({ error: "Invalid title field" });
@@ -234,6 +239,7 @@ router.patch("/:projectId/:taskId", authMiddleware, async (req, res) => {
       }
       updateData.status = status;
     }
+    // validation and adding updateData obj. start here
 
     // beautiful
     if (Object.keys(updateData).length === 0) {
@@ -246,16 +252,16 @@ router.patch("/:projectId/:taskId", authMiddleware, async (req, res) => {
     );
     if (!isOwner) {
       return res.status(403).json({
-        error: "Project couldn't found or unauthorized"
+        error: "Project not found or unauthorized"
       })
     }
     // owner ends
+
     const updatedTask = await Task.findOneAndUpdate(
       { _id: taskId, project: projectId },
       updateData,
       { new: true, runValidators: true }
     );
-
 
     if (!updatedTask) {
       return res
@@ -263,9 +269,9 @@ router.patch("/:projectId/:taskId", authMiddleware, async (req, res) => {
         .json({ error: "task not found" });
     }
 
-    // 4️⃣ Success response
+    //! final success response
     res.status(200).json({
-      message: "Updated successfully",
+      message: "Task updated successfully",
       updatedTask,
     });
   } catch (error) {
