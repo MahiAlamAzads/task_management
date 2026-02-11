@@ -1,6 +1,7 @@
 "use client"
-import * as React from "react"
-import { GalleryVerticalEnd, PlusIcon } from "lucide-react"
+
+import { GalleryVerticalEnd } from "lucide-react"
+
 
 import {
   Sidebar,
@@ -16,20 +17,19 @@ import {
 
 import {
   Item,
-  ItemActions,
   ItemContent,
-  ItemMedia,
   ItemTitle,
 } from "@/components/ui/item"
-import { BadgeCheckIcon, ChevronRightIcon } from "lucide-react"
 
-import { Input } from "./ui/input"
-import { Button } from "./ui/button"
 import { AppSidebarProps } from "@/app/types/type"
 import CreateTaskForm from "./CreateProject"
+import { useRouter } from "next/navigation"
+import { EditProjectForm } from "./EditProjectForm"
+import { DeleteProject } from "./DeleteProject"
 
 
 export function AppSidebar({ allProjects, setRender, render, ...props }: AppSidebarProps) {
+  const router = useRouter();
 
   return (
     <Sidebar {...props}>
@@ -69,17 +69,21 @@ export function AppSidebar({ allProjects, setRender, render, ...props }: AppSide
                 {allProjects.map((item) => (
                   // all project
                   <>
-                    <div className="flex w-full max-w-md flex-col gap-6">
+                  {/*edited here i can add justify "Items-Center" */}
+                    <div className="flex w-full max-w-md flex-col gap-10">
                       <Item variant="outline" size="sm" asChild>
                         <div>
                           {/* <ItemMedia>
                             <BadgeCheckIcon fill="" className="size-5 text-white" /> //todo I will add percetage for how much task completed...
                           </ItemMedia> */}
+
                           <ItemContent>
                             <ItemTitle>{item.title}</ItemTitle>
                           </ItemContent>
 
-                          <ChevronRightIcon className="size-4" />
+                          <EditProjectForm />
+
+                          <DeleteProject projectId={item._id} render={render} setRender={setRender} />
 
                         </div>
                       </Item>

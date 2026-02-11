@@ -23,3 +23,10 @@ export type CreateProjectFormProps = {
   setRender: Dispatch<SetStateAction<boolean | undefined>>;
   render: boolean | undefined;
 };
+
+
+export type DeleteTaskType = {
+  projectId: string;
+  setRender: Dispatch<SetStateAction<boolean | undefined>>;
+  render: boolean | undefined;
+}
