@@ -38,7 +38,7 @@ router.get('/', authMiddleware, async function (req, res, next) {
     try {
         const query = req.query;
 
-        const result = await Project.find({ user: req.user.userId })
+        const result = await Project.find({ user: req.user.userId }).sort({ createdAt: -1 })
         res.status(201).json({
             result
         })
