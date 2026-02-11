@@ -14,4 +14,5 @@ export interface Project {
 
 export interface AppSidebarProps extends React.ComponentProps<typeof Sidebar> {
   allProjects: Project[]; // or whatever type you defined
+  render: boolean | undefined; //todo: need to edit its just placeholder
 }

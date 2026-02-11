@@ -29,7 +29,7 @@ import { AppSidebarProps } from "@/app/types/type"
 import CreateTaskForm from "./CreateProject"
 
 
-export function AppSidebar({ allProjects, ...props }: AppSidebarProps) {
+export function AppSidebar({ allProjects,render, ...props }: AppSidebarProps) {
 
   return (
     <Sidebar {...props}>
@@ -54,7 +54,7 @@ export function AppSidebar({ allProjects, ...props }: AppSidebarProps) {
         {/* input for create project start */}
         <CreateTaskForm />
         {/* input for create project start */}
-        
+
         <SidebarGroup>
           <SidebarMenu>
             {/* menu item starts */}

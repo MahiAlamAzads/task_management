@@ -12,6 +12,7 @@ router.post('/', authMiddleware, async function (req, res, next) {
         // validation
         if (!title) {
             return res.status(400).json({
+                success: false,
                 message: "Please, Fill the title"
             })
         }
@@ -25,6 +26,7 @@ router.post('/', authMiddleware, async function (req, res, next) {
         await data_to_save.save();
 
         res.status(201).json({
+            success: true,
             message: "Project created Successfully"
         })
     } catch (error) {
