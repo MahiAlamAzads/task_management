@@ -1,11 +1,12 @@
 "use client";
 import { PlusIcon } from "lucide-react";
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { getJwtToken } from "@/app/helper/token";
+import { CreateProjectFormProps } from "@/app/types/type";
 
-export default function CreateProjectForm() {
+export default function CreateProjectForm({setRender, render}: CreateProjectFormProps) {
   const [title, setTitle] = useState("");
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -23,6 +24,7 @@ export default function CreateProjectForm() {
     const data = await res.json();
     console.log("Created task:", data);
     setTitle(""); // clear input after submit
+    setRender(!render)
   };
 
   return (

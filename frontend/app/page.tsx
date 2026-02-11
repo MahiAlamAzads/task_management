@@ -22,9 +22,6 @@ import { Project } from "./types/type"
 export default function Page() {
   const [projects, setProjects] = useState<Project[]>([]);
   const [render,setRender] = useState<boolean | undefined>();
-  setTimeout(()=>{
-    setRender(false)
-  },5000)
   useEffect(() => {
     fetchProjects(setProjects);
   }, [render])
@@ -32,7 +29,7 @@ export default function Page() {
 
   return (
     <SidebarProvider>
-      <AppSidebar allProjects={projects} render={render}/>
+      <AppSidebar allProjects={projects} render={render} setRender={setRender}/>
       <SidebarInset>
         <header className="flex h-16 shrink-0 items-center gap-2 border-b">
           <div className="flex items-center gap-2 px-3">

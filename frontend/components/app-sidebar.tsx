@@ -29,7 +29,7 @@ import { AppSidebarProps } from "@/app/types/type"
 import CreateTaskForm from "./CreateProject"
 
 
-export function AppSidebar({ allProjects,render, ...props }: AppSidebarProps) {
+export function AppSidebar({ allProjects, setRender, render, ...props }: AppSidebarProps) {
 
   return (
     <Sidebar {...props}>
@@ -52,7 +52,7 @@ export function AppSidebar({ allProjects,render, ...props }: AppSidebarProps) {
       <SidebarContent>
 
         {/* input for create project start */}
-        <CreateTaskForm />
+        <CreateTaskForm render={render} setRender={setRender} />
         {/* input for create project start */}
 
         <SidebarGroup>
@@ -71,17 +71,17 @@ export function AppSidebar({ allProjects,render, ...props }: AppSidebarProps) {
                   <>
                     <div className="flex w-full max-w-md flex-col gap-6">
                       <Item variant="outline" size="sm" asChild>
-                        <a href="#">
+                        <div>
                           {/* <ItemMedia>
                             <BadgeCheckIcon fill="" className="size-5 text-white" /> //todo I will add percetage for how much task completed...
                           </ItemMedia> */}
                           <ItemContent>
                             <ItemTitle>{item.title}</ItemTitle>
                           </ItemContent>
-                          <ItemActions>
-                            <ChevronRightIcon className="size-4" />
-                          </ItemActions>
-                        </a>
+
+                          <ChevronRightIcon className="size-4" />
+
+                        </div>
                       </Item>
                     </div>
                   </>
