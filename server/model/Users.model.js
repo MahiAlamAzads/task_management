@@ -14,7 +14,7 @@ const userSchema = new mongoose.Schema({
   // we add reference with collection name: Projects
   projects: [
     {
-      type: mongoose.Schema.Types.ObjectId, ref: "Projects"
+      type: mongoose.Schema.Types.ObjectId, ref: "Project"
     }
   ]
 }, { timestamps: true });

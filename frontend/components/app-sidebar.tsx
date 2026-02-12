@@ -23,13 +23,13 @@ import {
 
 import { AppSidebarProps } from "@/app/types/type"
 import CreateTaskForm from "./CreateProject"
-import { useRouter } from "next/navigation"
+// import { useRouter } from "next/navigation"
 import { EditProjectForm } from "./EditProjectForm"
 import { DeleteProject } from "./DeleteProject"
 
 
 export function AppSidebar({ allProjects, setRender, render, ...props }: AppSidebarProps) {
-  const router = useRouter();
+  // const router = useRouter();
 
   return (
     <Sidebar {...props}>
@@ -70,7 +70,7 @@ export function AppSidebar({ allProjects, setRender, render, ...props }: AppSide
                   // all project
                   <>
                   {/*edited here i can add justify "Items-Center" */}
-                    <div className="flex w-full max-w-md flex-col gap-10">
+                    <div key={item._id} className="flex w-full max-w-md flex-col gap-10">
                       <Item variant="outline" size="sm" asChild>
                         <div>
                           {/* <ItemMedia>
@@ -81,7 +81,7 @@ export function AppSidebar({ allProjects, setRender, render, ...props }: AppSide
                             <ItemTitle>{item.title}</ItemTitle>
                           </ItemContent>
 
-                          <EditProjectForm />
+                          <EditProjectForm projectId={item._id} render={render} setRender={setRender}/>
 
                           <DeleteProject projectId={item._id} render={render} setRender={setRender} />
 

@@ -10,6 +10,7 @@ export async function fetchProjects(setProjects: React.Dispatch<React.SetStateAc
         },
     })
     const data = await result.json();
+    console.log("fixing: ", data)
     setProjects(data.result)
     return data;
 }

@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+ const mongoose = require("mongoose");
 
 const projectSchema = new mongoose.Schema({
     title: {
@@ -11,13 +11,15 @@ const projectSchema = new mongoose.Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
-        ref: "User"
+        ref: "User",
+        index: true
     },
     tasks: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: "Task"
     }]
 }, { timestamps: true });
+projectSchema.index({ owner: 1, createdAt: -1 });
 
 module.exports = mongoose.model("Project", projectSchema);
 

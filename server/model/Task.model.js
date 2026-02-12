@@ -21,24 +21,34 @@ visualize:
   "updatedAt": "2026-02-08T17:15:00.000Z"
 }
  */
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
 
-const taskSchema = new mongoose.Schema({
-  title: { type: String, required: true },
-  comment: {
-    type: String,
-    maxlength: 500
+const taskSchema = new mongoose.Schema(
+  {
+    title: { type: String, required: true },
+    comment: {
+      type: String,
+      maxlength: 500,
+    },
+    status: {
+      type: String,
+      enum: ["In-progress", "pending", "done"],
+      default: "pending",
+    },
+    project: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Project",
+      required: true,
+      index: true, // <-- index for fast project queries
+    },
   },
-  status: {
-    type: String,
-    enum: ["In-progress", "pending", "done"],
-    default: "pending"
-  },
-  project: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Project",
-    required: true
-  }
-}, { timestamps: true })
+  { timestamps: true }
+);
+
+// Optional: index createdAt for sorting tasks by creation time
+taskSchema.index({ createdAt: -1 });
+
+// Optional: compound index if you often filter by project + status
+taskSchema.index({ project: 1, status: 1 });
 
 module.exports = mongoose.model("Task", taskSchema);
