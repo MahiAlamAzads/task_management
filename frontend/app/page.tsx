@@ -1,21 +1,12 @@
 "use client"
 import { AppSidebar } from "@/components/app-sidebar"
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb"
-import { Separator } from "@/components/ui/separator"
+
 import {
   SidebarInset,
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar"
 import { useEffect, useState } from "react"
-import { getJwtToken } from "./helper/token"
 import { fetchProjects } from "./helper/fetchProjects"
 import { Project } from "./types/type"
 
