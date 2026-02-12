@@ -28,11 +28,12 @@ import { EditProjectForm } from "./EditProjectForm"
 import { DeleteProject } from "./DeleteProject"
 
 
-export function AppSidebar({ allProjects, setRender, render, ...props }: AppSidebarProps) {
+export function AppSidebar({ allProjects = [], setRender, render, ...props }: AppSidebarProps) {
   // const router = useRouter();
 
   return (
     <Sidebar {...props}>
+      
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
@@ -49,8 +50,8 @@ export function AppSidebar({ allProjects, setRender, render, ...props }: AppSide
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarHeader>
-      <SidebarContent>
 
+      <SidebarContent>
         {/* input for create project start */}
         <CreateTaskForm render={render} setRender={setRender} />
         {/* input for create project start */}
@@ -68,27 +69,27 @@ export function AppSidebar({ allProjects, setRender, render, ...props }: AppSide
               <SidebarMenuSub>
                 {allProjects.map((item) => (
                   // all project
-                  <>
-                  {/*edited here i can add justify "Items-Center" */}
-                    <div key={item._id} className="flex w-full max-w-md flex-col gap-10">
-                      <Item variant="outline" size="sm" asChild>
-                        <div>
-                          {/* <ItemMedia>
+
+                  <div key={item._id} className="flex w-full max-w-md flex-col gap-10">
+                    {/*edited here i can add justify "Items-Center" */}
+                    <Item variant="outline" size="sm" asChild>
+                      <div>
+                        {/* <ItemMedia>
                             <BadgeCheckIcon fill="" className="size-5 text-white" /> //todo I will add percetage for how much task completed...
                           </ItemMedia> */}
 
-                          <ItemContent>
-                            <ItemTitle>{item.title}</ItemTitle>
-                          </ItemContent>
+                        <ItemContent>
+                          <ItemTitle>{item.title}</ItemTitle>
+                        </ItemContent>
 
-                          <EditProjectForm projectId={item._id} render={render} setRender={setRender}/>
+                        <EditProjectForm projectId={item._id} render={render} setRender={setRender} />
 
-                          <DeleteProject projectId={item._id} render={render} setRender={setRender} />
+                        <DeleteProject projectId={item._id} render={render} setRender={setRender} />
 
-                        </div>
-                      </Item>
-                    </div>
-                  </>
+                      </div>
+                    </Item>
+                  </div>
+
                 ))}
               </SidebarMenuSub>
 

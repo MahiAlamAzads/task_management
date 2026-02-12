@@ -1,5 +1,5 @@
 import { getJwtToken } from "@/app/helper/token"
-import { DeleteTaskType, Project } from "@/app/types/type"
+import { DeleteProjectType, Project } from "@/app/types/type"
 import { Button } from "@/components/ui/button"
 
 import {
@@ -14,8 +14,9 @@ import {
 import { Trash2 } from "lucide-react"
 import { toast } from "sonner"
 
-export function DeleteProject({ projectId, render, setRender }: DeleteTaskType) {
-  async function handleDelete() {
+export function DeleteProject({ projectId, render, setRender }: DeleteProjectType) {
+  async function handleDelete(e: React.FormEvent<HTMLFormElement>) {
+      e.preventDefault();
     const data = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/project/${projectId}`, {
       method: "DELETE",
       headers: {
@@ -42,9 +43,10 @@ export function DeleteProject({ projectId, render, setRender }: DeleteTaskType) 
 
   return (
     <Dialog>
-      <DialogTrigger>
-        <Button><Trash2 /></Button>
-      </DialogTrigger>
+      <form onSubmit={handleDelete}>
+        <DialogTrigger asChild>
+          <Button variant="outline"><Trash2/></Button>
+        </DialogTrigger>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Are you absolutely sure?</DialogTitle>
@@ -61,11 +63,12 @@ export function DeleteProject({ projectId, render, setRender }: DeleteTaskType) 
 
           {/* Delete button */}
           <DialogClose>
-            <Button onClick={handleDelete} className="bg-red-500">Delete</Button>
+            <Button type="submit" className="bg-red-500">Delete</Button>
           </DialogClose>
         </div>
 
       </DialogContent>
+      </form>
     </Dialog>
   )
 }

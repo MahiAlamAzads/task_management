@@ -9,6 +9,7 @@ import {
 import { useEffect, useState } from "react"
 import { fetchProjects } from "./helper/fetchProjects"
 import { Project } from "./types/type"
+import Link from "next/link"
 
 export default function Page() {
   const [projects, setProjects] = useState<Project[]>([]);
@@ -25,6 +26,7 @@ export default function Page() {
         <header className="flex h-16 shrink-0 items-center gap-2 border-b">
           <div className="flex items-center gap-2 px-3">
             <SidebarTrigger />
+            <Link href={"/login"}>Login</Link>
           </div>
         </header>
         <div className="flex flex-1 flex-col gap-4 p-4">
