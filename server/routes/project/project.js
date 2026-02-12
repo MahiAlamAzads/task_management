@@ -73,6 +73,7 @@ router.delete('/:projectId', authMiddleware, async function (req, res, next) {
         }
         await existingProject.deleteOne();
         res.status(200).json({
+            success: true,
             message: `'${existingProject.title}' is deleted successfully`
         });
     } catch (error) {

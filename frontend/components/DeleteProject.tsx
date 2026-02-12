@@ -23,16 +23,19 @@ export function DeleteProject({ projectId, render, setRender }: DeleteTaskType) 
         "Authorization": `Bearer ${getJwtToken()}`
       }
     })
+
     const result = await data.json();
-    if(result.ok){
-      toast("Event has been created", {
-      description: "Sunday, December 03, 2023 at 9:00 AM",
-      action: {
-        label: "Undo",
-        onClick: () => console.log("Undo"),
-      },
-    })
+
+    if (result.success) {
+      toast(result.message, {
+        description: new Date().toLocaleString(),
+      });
+    } else {
+      toast("failed to delete", {
+        description: new Date().toLocaleString(),
+      });
     }
+
     console.log(result)
     setRender(!render)
   }
