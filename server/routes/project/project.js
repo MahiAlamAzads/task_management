@@ -2,6 +2,7 @@ const express = require("express")
 const router = express.Router()
 const authMiddleware = require("../../middlewares/isAuthenticate.middleware");
 const Project = require("../../model/Project.model");
+const User = require("../../model/Users.model");
 const mongoose = require("mongoose")
 
 router.post('/', authMiddleware, async function (req, res, next) {
@@ -24,6 +25,7 @@ router.post('/', authMiddleware, async function (req, res, next) {
         })
 
         await data_to_save.save();
+
 
         res.status(201).json({
             success: true,

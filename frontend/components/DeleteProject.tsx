@@ -15,8 +15,7 @@ import { Trash2 } from "lucide-react"
 import { toast } from "sonner"
 
 export function DeleteProject({ projectId, render, setRender }: DeleteProjectType) {
-  async function handleDelete(e: React.FormEvent<HTMLFormElement>) {
-      e.preventDefault();
+  async function handleDelete() {
     const data = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/project/${projectId}`, {
       method: "DELETE",
       headers: {
@@ -45,7 +44,7 @@ export function DeleteProject({ projectId, render, setRender }: DeleteProjectTyp
     <Dialog>
       <form onSubmit={handleDelete}>
         <DialogTrigger asChild>
-          <Button variant="outline"><Trash2/></Button>
+          <div className="flex items-center bg-black rounded text-white px-2 text-[14px]"><Trash2 className="w-4"/></div>
         </DialogTrigger>
       <DialogContent>
         <DialogHeader>
@@ -58,13 +57,11 @@ export function DeleteProject({ projectId, render, setRender }: DeleteProjectTyp
         <div className="flex justify-end gap-2 mt-4">
           {/* Custom cancel button */}
           <DialogClose asChild>
-            <Button variant="outline">Cancel</Button>
+            <div className="flex items-center bg-black rounded text-white px-2 text-[14px]">Cancel</div>
           </DialogClose>
 
           {/* Delete button */}
-          <DialogClose>
-            <Button type="submit" className="bg-red-500">Delete</Button>
-          </DialogClose>
+            <Button onClick={handleDelete} className="bg-red-500">Delete</Button>        
         </div>
 
       </DialogContent>

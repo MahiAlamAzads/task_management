@@ -5,7 +5,7 @@ export interface Project {
   _id: string;
   title: string;
   user: string;
-  tasks: any[]; // you can replace `any[]` with a Task[] interface if you define tasks
+  taskCount: number;
   createdAt: string;
   updatedAt: string;
   __v: number;
@@ -17,6 +17,7 @@ export interface AppSidebarProps extends React.ComponentProps<typeof Sidebar> {
   allProjects: Project[]; // or whatever type you defined
   setRender: Dispatch<SetStateAction<boolean | undefined>>; //todo: need to edit its just placeholder
   render: boolean | undefined;
+  setProjectForTask: Dispatch<SetStateAction<string | undefined>>;
 }
 
 export type CreateProjectFormProps = {

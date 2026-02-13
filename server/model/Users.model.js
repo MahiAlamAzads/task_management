@@ -12,11 +12,10 @@ const userSchema = new mongoose.Schema({
   },
 
   // we add reference with collection name: Projects
-  projects: [
-    {
-      type: mongoose.Schema.Types.ObjectId, ref: "Project"
-    }
-  ]
+  projectsCount: {
+    type: Number,
+    default: 0
+  }
 }, { timestamps: true });
 
 module.exports = mongoose.model("User", userSchema);

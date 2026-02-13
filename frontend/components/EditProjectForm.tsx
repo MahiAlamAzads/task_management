@@ -49,7 +49,7 @@ export function EditProjectForm({ projectId, render, setRender }: EditProjectTyp
     <Dialog>
       {/* <form onSubmit={handleSubmit}> */}
         <DialogTrigger asChild>
-          <Button variant="outline"><Edit /></Button>
+          <div className="flex items-center bg-gray-200 rounded text-black px-2 text-[14px]"><Edit className="w-4"/></div>
         </DialogTrigger>
         <DialogContent className="sm:max-w-sm">
           <DialogHeader>
@@ -73,7 +73,7 @@ export function EditProjectForm({ projectId, render, setRender }: EditProjectTyp
           <DialogFooter>
             <div className="flex justify-end gap-2 mt-4">
               <DialogClose asChild>
-                <Button type="button" variant="outline">Cancel</Button>
+                <div className="flex items-center bg-black rounded text-white px-2 text-[14px]">Cancle</div>
               </DialogClose>
               <Button onClick={()=>handleSubmit()} type="submit" className="bg-red-500 text-white">
                 Submit

@@ -26,10 +26,19 @@ import CreateTaskForm from "./CreateProject"
 // import { useRouter } from "next/navigation"
 import { EditProjectForm } from "./EditProjectForm"
 import { DeleteProject } from "./DeleteProject"
+import { useRouter } from "next/navigation"
 
 
-export function AppSidebar({ allProjects = [], setRender, render, ...props }: AppSidebarProps) {
+export function AppSidebar({ allProjects = [], setRender, render,setProjectForTask, ...props }: AppSidebarProps) {
+  const router = useRouter()
   // const router = useRouter();
+  // function handleOpenTask(projectId: string){
+  //   router.push(`/tasks/${projectId}`)
+  // }
+
+  function handleOpenTask(projectId: string){
+    setProjectForTask(projectId)
+  }
 
   return (
     <Sidebar {...props}>
@@ -78,13 +87,17 @@ export function AppSidebar({ allProjects = [], setRender, render, ...props }: Ap
                             <BadgeCheckIcon fill="" className="size-5 text-white" /> //todo I will add percetage for how much task completed...
                           </ItemMedia> */}
 
-                        <ItemContent>
+                        <ItemContent onClick={()=> handleOpenTask(item._id)}>
                           <ItemTitle>{item.title}</ItemTitle>
                         </ItemContent>
 
-                        <EditProjectForm projectId={item._id} render={render} setRender={setRender} />
+                        <div className="z-99">
+                          <EditProjectForm projectId={item._id} render={render} setRender={setRender} />
+                        </div>
 
-                        <DeleteProject projectId={item._id} render={render} setRender={setRender} />
+                        <div className="z-99">
+                          <DeleteProject projectId={item._id} render={render} setRender={setRender} />
+                        </div>
 
                       </div>
                     </Item>

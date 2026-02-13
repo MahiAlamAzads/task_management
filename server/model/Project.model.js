@@ -1,4 +1,4 @@
- const mongoose = require("mongoose");
+const mongoose = require("mongoose");
 
 const projectSchema = new mongoose.Schema({
     title: {
@@ -14,10 +14,10 @@ const projectSchema = new mongoose.Schema({
         ref: "User",
         index: true
     },
-    tasks: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Task"
-    }]
+    taskCount: {
+        type: Number,
+        default: 0
+    }
 }, { timestamps: true });
 projectSchema.index({ owner: 1, createdAt: -1 });
 

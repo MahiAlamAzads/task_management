@@ -68,6 +68,13 @@ router.post('/:projectId', authMiddleware, taskLimiter, async function (req, res
 
     await data_to_save.save();
 
+    // incremnt
+    await Project.findByIdAndUpdate(
+      projectId,
+      { $inc: { taskCount: 1 } },  // ✅ increment by 1
+      { new: true }
+    );
+
     res.status(201).json({
       message: "Task created successfully",
       task: data_to_save
