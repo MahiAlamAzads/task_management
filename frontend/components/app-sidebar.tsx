@@ -52,7 +52,7 @@ export function AppSidebar({ allProjects = [], setRender, render,setProjectForTa
                   <GalleryVerticalEnd className="size-4" />
                 </div>
                 <div className="flex flex-col gap-0.5 leading-none">
-                  <span className="font-medium">Task Manager</span>
+                  <h1 className="font-medium">Taskpad - MahiAlam</h1>
                 </div>
               </a>
             </SidebarMenuButton>

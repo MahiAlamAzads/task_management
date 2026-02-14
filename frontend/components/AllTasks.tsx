@@ -42,7 +42,7 @@ export default function AllTasks({ tasks = [], projectId, refetchTasks }: { task
                             className="group flex justify-between items-start p-4 rounded-lg border border-gray-200 bg-white shadow-sm hover:shadow-md transition"
                         >
                             {/* Left side: title + optional comment */}
-                            <div className="flex flex-col break-words whitespace-normal">
+                            <div className="flex flex-col break-words whitespace-normal w-40 sm:w-70 md:w-90 lg:w-150">
                                 <p className="text-base font-semibold text-gray-800 line-clamp-2">
                                    {`${index + 1}. ${task.title}`}
                                 </p>

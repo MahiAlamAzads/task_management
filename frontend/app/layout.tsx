@@ -16,8 +16,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Taskinger",
-  description: "Created By Mahi Alam Azad",
+  title: "taskpad",
+  description: "Taskpad is Created By Mahi Alam Azad.",
 };
 
 export default function RootLayout({
