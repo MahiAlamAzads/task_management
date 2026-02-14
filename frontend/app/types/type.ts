@@ -35,3 +35,15 @@ type ProjectRenderProps = {
 export type DeleteProjectType = ProjectRenderProps;
 
 export type EditProjectType = ProjectRenderProps;
+
+
+export interface TaskType {
+    _id: string;
+    title: string;
+    comment: string;
+    status: "pending" | "completed" | "in-progress"; // adjust to your backend values
+    project: string;
+    createdAt: string; // ISO date string
+    updatedAt: string; // ISO date string
+    __v: number;
+}

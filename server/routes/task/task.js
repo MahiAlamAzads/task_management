@@ -16,7 +16,7 @@ const taskLimiter = rateLimit({
 
 router.post('/:projectId', authMiddleware, taskLimiter, async function (req, res, next) {
   try {
-    const { title } = req.body;
+    const { title, comment } = req.body;
     const { projectId } = req.params;
     const user = req.user.userId;
 
@@ -25,6 +25,13 @@ router.post('/:projectId', authMiddleware, taskLimiter, async function (req, res
       return res.status(400).json({
         error: "Please, Fill the title"
       });
+    }
+    if (comment) {
+      if (comment.length > 500) {
+        return res.status(400).json({
+          error: "Don't exceed 500 characters"
+        });
+      }
     }
 
     if (typeof title !== "string") {
@@ -63,6 +70,7 @@ router.post('/:projectId', authMiddleware, taskLimiter, async function (req, res
 
     const data_to_save = new Task({
       title: title,
+      comment: typeof comment === "string" ? comment : "",
       project: projectId
     })
 

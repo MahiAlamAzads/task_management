@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/input-group";
 import { getJwtToken } from "@/app/helper/token";
 
-export function CreateTaskForm({ projectId }: { projectId: string }) {
+export function CreateTaskForm({ projectId, onTaskCreated }: { projectId: string | undefined, onTaskCreated?: () => void }) {
   const [title, setTitle] = useState("");
   const [comment, setComment] = useState("");
 
@@ -46,6 +46,8 @@ export function CreateTaskForm({ projectId }: { projectId: string }) {
       // Optionally reset form
       setTitle("");
       setComment("");
+      // Notify parent to refetch tasks
+      if (onTaskCreated) onTaskCreated();
     } catch (error) {
       console.error("Error creating task:", error);
     }
